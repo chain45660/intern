@@ -1,0 +1,133 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hyperledger Fabric Machine Application</title>
+    <link rel="icon" href="favicon.png" type="image/gif">
+
+    <!-- require jquery and bootstrap scripts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+
+    <!-- adding style here -->
+    <style type="text/css">
+      header{
+        background-color: lightgray;
+        font-size:20px;
+        padding:15px;
+      }
+      header, .form-group{
+        margin-bottom: 3%;
+      }
+      .form-group{
+        width:50%;
+      }
+      #body{
+        margin-left:3%;
+        margin-right:3%;
+      }
+      .form-control{
+        margin: 8px;
+      }
+      #right_header{
+        width:20%;
+        font-size:15px;
+        margin-right:0px;
+      }
+      #left_header{
+        margin-left:0;
+        width:40%;
+        display:inline-block;
+      }
+      #id {
+        width:49%;
+        display: inline-block;
+      }
+      table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+      }
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+      }
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <body ng-app="application" ng-controller="appController">
+    <header>
+      <div id="left_header">Hyperledger Fabric Predictive Maintenance Application</div>
+    </header>
+    <div id="body">
+      <div class="form-group">
+        <label>Query All Machines </label>
+        <p><input id="queryAllMachine" type="submit" value="Query" class="btn btn-primary" ng-click="queryAllMachine()"></p>
+      </div>
+
+      <table id="all_machine" class="table" align="center">
+
+        <tr>
+          <th>ID</th>
+          <th>Timestamp</th>
+          <th>Toolwear</th>
+        </tr>
+
+        <tr ng-repeat="machine in all_machine">
+          <td>{{machine.Key}}</td>
+          <td>{{machine.timestamp}}</td>
+          <td>{{machine.toolwear}}</td>
+        </tr>
+      </table>
+
+      <div class="form-group">
+        <label>Query a Specific Machine State</label><br>
+        <h5 style="color:red;margin-bottom:2%" id="error_query">Error: Please enter a valid Machine Id</h5>
+
+        Enter a machine number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="machine_id">
+        <input id="querySubmit" type="submit" value="Query" class="btn btn-primary" ng-click="queryMachine()">
+      </div>
+
+      <table id="query_machine" class="table" align="center">
+
+        <tr>
+          <th>Timestamp</th>
+          <th>Toolwear</th>
+        </tr>
+
+        <tr>
+          <td>{{query_machine.timestamp}}</td>
+          <td>{{query_machine.toolwear}}</td>
+        </tr>
+      </table>
+
+      <div class="form-group">
+        <label>Create Machine Record</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_create">Success! Tx ID: {{create_machine}}</h5>
+        <br>
+        Enter machine id: <input class="form-control" type="text" placeholder="Ex: 11" ng-model="machine.id">
+        Enter timestamp: <input class="form-control" type="text" placeholder="Ex: 4982342301" ng-model="machine.timestamp">
+        Enter toolwear: <input class="form-control" type="text" placeholder="Ex: 0.1" ng-model="machine.toolwear">
+        <input id="createSubmit" type="submit" value="Create" class="btn btn-primary" ng-click="recordMachine()">
+      </div>
+
+      <div class="form-group">
+        <label>Change Machine Toolwear</label><br>
+        <h5 style="color:green;margin-bottom:2%" id="success_toolwear">Success! Tx ID: {{change_toolwear}}</h5>
+        <h5 style="color:red;margin-bottom:2%" id="error_toolwear">Error: Please enter a valid Machine Id</h5>
+        Enter a machine id between 1 and 10: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="machine.id">
+        Enter new toolwear: <input class="form-control" name="assetSelect" placeholder="Ex: Barry" ng-model="machine.toolwear">
+        <input id="transferSubmit" type="submit" value="Change" class="btn btn-primary" ng-click="changeToolwear()">
+      </div>
+
+    </div>
+  </body>
+    <!-- requiring the angular page -->
+    <script type="text/javascript" src="app.js"> </script>
+</html>

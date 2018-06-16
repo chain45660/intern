@@ -1,0 +1,256 @@
+<!--
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<div class="modal fade" id="addTransactionModal" tabindex="-1" role="dialog" aria-labelledby="addTransactionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addTransactionModalLabel">Create Transaction</h4>
+        <p class="modal-intro">Enter the required values below.</p>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+
+          <div class="form-group text-left">
+            <label for="assetDiagn">assetDiagn</label>
+
+            <textarea formControlName="assetDiagn" class="form-control" rows="3"></textarea>
+
+          </div>
+
+          <div class="form-group text-left">
+            <label for="assetProgn">assetProgn</label>
+
+            <textarea formControlName="assetProgn" class="form-control" rows="3"></textarea>
+
+          </div>
+
+          <div class="form-group text-left">
+            <label for="newToolCondition">newToolCondition</label>
+            <input formControlName="newToolCondition" type="number" class="form-control">
+
+          </div>
+
+          <div class="form-group text-left">
+            <label for="newMisalignment">newMisalignment</label>
+            <input formControlName="newMisalignment" type="number" class="form-control">
+
+          </div>
+
+          <div class="form-group text-left">
+            <label for="newUnbalance">newUnbalance</label>
+
+            <input formControlName="newUnbalance" type="number" class="form-control">
+
+          </div>
+
+          <div class="form-group text-left">
+            <label for="transactionId">transactionId</label>
+
+            <input formControlName="transactionId" type="text" class="form-control">
+
+          </div>
+
+          <div class="form-group text-left">
+            <label for="timestamp">timestamp</label>
+
+            <input formControlName="timestamp" type="text" class="form-control">
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button (click)="addTransaction(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="updateTransactionModal" tabindex="-1" role="dialog" aria-labelledby="updateTransactionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+        <h4 class="modal-title" id="updateTransactionModalLabel">Update Transaction</h4>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+
+
+
+          <div class="form-group text-left">
+            <label for="assetDiagn">assetDiagn</label>
+
+
+
+            <textarea [ngModel]="assetDiagn" formControlName="assetDiagn" class="form-control" rows="3"></textarea>
+
+
+
+          </div>
+
+          <div class="form-group text-left">
+            <label for="assetProgn">assetProgn</label>
+
+
+
+            <textarea [ngModel]="assetProgn" formControlName="assetProgn" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-group text-left">
+            <label for="newToolCondition">newToolCondition</label>
+            <input [ngModel]="newToolCondition" formControlName="newToolCondition" type="number" class="form-control">
+          </div>
+          <div class="form-group text-left">
+            <label for="newMisalignment">newMisalignment</label>
+            <input [ngModel]="newMisalignment" formControlName="newMisalignment" type="number" class="form-control">
+          </div>
+          <div class="form-group text-left">
+            <label for="newUnbalance">newUnbalance</label>
+            <input [ngModel]="newUnbalance" formControlName="newUnbalance" type="number" class="form-control">
+          </div>
+          <div class="form-group text-left">
+            <label for="transactionId">transactionId</label>
+            <input [ngModel]="transactionId" formControlName="transactionId" type="text" class="form-control">
+          </div>
+
+          <div class="form-group text-left">
+            <label for="timestamp">timestamp</label>
+            <input [ngModel]="timestamp" formControlName="timestamp" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button (click)="updateTransaction(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteTransactionModal" tabindex="-1" role="dialog" aria-labelledby="deleteTransactionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+        <h4 class="modal-title" id="deleteTransactionModalLabel">Delete Transaction</h4>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="deleteTransaction()">
+        <div class="modal-body">
+          Are you sure you want to delete this Transaction?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button (click)="deleteTransaction()" type="submit" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFileLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+        <h4 class="modal-title" id="uploadFileModalLabel">File Upload</h4>
+      </div>
+        <p class="modal-intro">Select the file.</p>
+        
+          <div class="form-group">
+            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+              <div class="form-control" data-trigger="fileinput">
+                <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                <span class="fileinput-filename"></span>
+              </div>
+              <span class="input-group-addon btn btn-sucess btn-file">
+                <span class="fileinput-new"></span>
+                <input id="fileupload" type="file" name="fileupload" multiple data-sequential-uploads="true" 
+                 (change)="fileChangeListener($event)"/>
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <!-- <button (click)="uploadData()" type="submit" class="btn btn-success" data-dismiss="modal">Upload</button> -->
+        </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <table class="table table-responsive table-hover" border="1" style="width : 50%;">
+    <tbody>
+      <ng-container *ngFor="let csvRec of csvRecords;let i=index">
+        <tr>
+          <ng-container *ngFor="let data of csvRec;let j=index">
+            <td>{{data}}</td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        <strong>Error:</strong> {{errorMessage}}
+    </div>
+
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTransactionModal" style="width:auto">Add Transaction</button>
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#updateTransactionModal" style="width:auto">Update Transaction</button>
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#deleteTransactionModal" style="width:auto">Delete Transaction</button>
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#uploadFile" style="width:auto">Upload File</button>
+
+  <div class="row">
+    <div class="col-md-9">
+        <h1 class="transaction-title" id='transactionName'>assetReport</h1>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          When invoked, this transaction will have the following attributes:
+          <br>
+          <ul>            
+              <li><span class="attribute"><b>assetDiagn</b></span></li>            
+              <li><span class="attribute"><b>assetProgn</b></span></li>            
+              <li><span class="attribute"><b>newToolCondition</b></span></li>            
+              <li><span class="attribute"><b>newMisalignment</b></span></li>            
+              <li><span class="attribute"><b>newUnbalance</b></span></li>          
+              <li><span class="attribute"><b>transactionId</b></span></li>        
+              <li><span class="attribute"><b>timestamp</b></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 

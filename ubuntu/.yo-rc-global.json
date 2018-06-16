@@ -1,0 +1,12 @@
+{
+  "generator-hyperledger-composer:0.19.5": {
+    "promptValues": {
+      "appname": "tutorial-network",
+      "appdescription": "tutorial.",
+      "appauthor": "Palina Tolmach",
+      "appemail": "polina.tolmach@gmail.com",
+      "ns": "org.example.mynetwork",
+      "empty": "no"
+    }
+  }
+}
